@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('actu', function (Blueprint $table) {
+        Schema::create('photo_ambiances', function (Blueprint $table) {
             $table->id();
-            $table->text('contenu');
-            $table->dateTime('date_publication');
+            $table->string('fichier');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('actu');
+        Schema::dropIfExists('photo_ambiances');
     }
 };
