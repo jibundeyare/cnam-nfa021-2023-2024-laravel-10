@@ -15,6 +15,8 @@ class Categorie extends Model
 
     public function plats()
     {
-        return $this->hasMany(Plat::class, 'categorie_id', 'id');
+        return $this
+            ->hasMany(Plat::class, 'categories_id', 'id')
+            ->get();
     }
 }
