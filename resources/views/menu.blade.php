@@ -14,6 +14,11 @@
                     <img src="{{ asset('images/'.$plat->fichier) }}" alt="{{ $plat->nom }}" />
                     <h4>{{ $plat->nom }}</h4>
                     <span class="prix">{{ $plat->prix }} eur</span>
+                    <ul>
+                        @foreach ($plat->etiquettes() as $etiquette)
+                            <li>{{ $etiquette->nom }}</li>
+                        @endforeach
+                    </ul>
                 </li>
                 @endforeach
             </ul>
