@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Actu;
 use App\Models\Categorie;
+use App\Models\Plat;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -24,6 +25,15 @@ class MainController extends Controller
         return view('menu', [
             // variables qui peuvent être utilisées dans le template
             'categories' => $categories,
+        ]);
+    }
+
+    public function plat(int $id)
+    {
+        $plat = Plat::find($id);
+
+        return view('plat', [
+            'plat' => $plat,
         ]);
     }
 }
