@@ -36,4 +36,9 @@ class MainController extends Controller
             'plat' => $plat,
         ]);
     }
+
+    public function reservation()
+    {
+        return view('reservation');
+    }
 }
