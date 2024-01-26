@@ -3,42 +3,54 @@
 @section('content')
 <section>
     <h2>Réservation</h2>
-    <form action="" method="post">
+    <form action="{{ route('main.reservation.store') }}" method="post">
+        @csrf
         <div>
             <label for="nom">Nom</label>
-            <input type="text" name="nom" id="nom" min="3" max="50" required>
+            <input type="text" name="nom" id="nom" min="3" max="50" value="{{ old('nom') }}" not-required>
+            @error('nom')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div>
             <label for="couverts">Nombre de couverts</label>
-            <input type="number" name="couverts" id="couverts" min="1" max="16" required>
+            <input type="number" name="couverts" id="couverts" min="1" max="16" value="{{ old('couverts') }}" not-required>
+            @error('couverts')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div>
             <label for="heure">Heure</label>
-            <select name="heure" id="heure" required>
+            <select name="heure" id="heure" not-required>
                 <option value=""></option>
-                <!-- créneaux du midi -->
-                <option value="12:00:00">12:00</option>
-                <option value="12:30:00">12:30</option>
-                <option value="13:00:00">13:00</option>
-                <option value="13:30:00">13:30</option>
-                <!-- créneaux du soir -->
-                <option value="20:00:00">20:00</option>
-                <option value="20:30:00">20:30</option>
-                <option value="21:00:00">21:00</option>
-                <option value="21:30:00">21:30</option>
+                @foreach ($heures as $heure)
+                    <option value="{{ $heure }}" {{ old('heure') == $heure ? 'selected' : '' }}>{{ $heure }}</option>
+                @endforeach
             </select>
+            @error('heure')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div>
             <label for="jour">Jour</label>
-            <input type="date" name="jour" id="jour" required>
+            <input type="date" name="jour" id="jour" min="{{ date('Y-m-d') }}" value="{{ old('jour') }}" not-required>
+            @error('jour')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div>
             <label for="telephone">Numéro de téléphone</label>
-            <input type="phone" name="telephone" id="telephone" required>
+            <input type="phone" name="telephone" id="telephone" value="{{ old('telephone') }}" not-required>
+            @error('telephone')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div>
             <label for="commentaires">Commentaires</label>
-            <textarea name="commentaires" id="commentaires" cols="30" rows="10"></textarea>
+            <textarea name="commentaires" id="commentaires" cols="30" rows="10">{{ old('commentaires') }}</textarea>
+            @error('commentaires')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div>
             <button type="submit">Réserver</button>
