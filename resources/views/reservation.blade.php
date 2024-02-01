@@ -1,8 +1,15 @@
 @extends('base')
 
+
+
 @section('content')
 <section>
     <h2>Réservation</h2>
+    {{-- <div class="invalid-feedback">
+        @foreach ($errors->all() as $error)
+            {{ $error }}
+        @endforeach
+    </div> --}}
     <form action="{{ route('main.reservation.store') }}" method="post">
         @csrf
         <div>

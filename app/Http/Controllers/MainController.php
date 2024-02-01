@@ -82,6 +82,8 @@ class MainController extends Controller
 
         $reservation->save();
 
-        dd($reservation->id);
+        return view('reservationStore', [
+            'reservation' => $reservation,
+        ]);
     }
 }
