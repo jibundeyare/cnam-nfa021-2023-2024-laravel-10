@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Actu;
 use App\Models\Categorie;
 use App\Models\Plat;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -67,10 +68,20 @@ class MainController extends Controller
             'couverts' => 'required|numeric|gte:1|lte:16',
             'heure' => "required|in:{$heures}",
             'jour' => 'required|date|date_format:Y-m-d|after_or_equal:today',
-            'telephone' => 'required',
-            'commentaires' => '',
+            'telephone' => 'required|min:10|max:10',
+            'commentaires' => 'nullable|min:10|max:1000',
         ]);
 
-        dd($validated);
+        $reservation = new Reservation();
+        $reservation->nom = $validated['nom'];
+        $reservation->couverts = $validated['couverts'];
+        $reservation->heure = $validated['heure'];
+        $reservation->jour = $validated['jour'];
+        $reservation->telephone = $validated['telephone'];
+        $reservation->commentaires = $validated['commentaires'];
+
+        $reservation->save();
+
+        dd($reservation->id);
     }
 }
