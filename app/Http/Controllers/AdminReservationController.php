@@ -23,8 +23,13 @@ class AdminReservationController extends Controller
 
     public function index()
     {
-        // récup la liste des résa
+        // récupération de la liste des réservations
+        $reservations = Reservation::all();
+
         // affiche un template
+        return view('admin.reservation.index', [
+            'reservations' => $reservations,
+        ]);
     }
 
     public function show()
