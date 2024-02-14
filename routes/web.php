@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AdminReservationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,14 @@ Route::get('/plat/{id}', [MainController::class, 'plat'])->name('main.plat');
 
 Route::get('/reservation', [MainController::class, 'reservation'])->name('main.reservation');
 Route::post('/reservation', [MainController::class, 'reservationStore'])->name('main.reservation.store');
+
+Route::get('/admin/reservation', [AdminReservationController::class, 'index'])->middleware('auth')->name('admin.reservation.index');
+
+Route::get('/admin/reservation/{id}', [AdminReservationController::class, 'show'])->middleware('auth')->name('admin.reservation.show');
+
+Route::get('/admin/reservation/{id}/edit', [AdminReservationController::class, 'edit'])->middleware('auth')->name('admin.reservation.edit');
+
+Route::put('/admin/reservation/{id}', [AdminReservationController::class, 'update'])->middleware('auth')->name('admin.reservation.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
